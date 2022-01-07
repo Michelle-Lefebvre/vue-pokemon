@@ -31,3 +31,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Add Tailwind
 
 vue add tailwind
+
+// Successfully invoked generator for plugin: vue-cli-plugin-tailwind
