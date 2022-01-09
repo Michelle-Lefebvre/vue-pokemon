@@ -13,7 +13,9 @@
       v-for="(pokemon, idx) in filteredPokemon"
       :key="idx"
     >
-      {{ pokemon.name }}
+      <router-link :to="`/about/${urlIdLookup[pokemon.name]}`">
+        {{ pokemon.name }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -21,12 +23,13 @@
 <script>
 // @ is an alias to /src toRefs allows us to take objects and destructure them while still being active
 import { reactive, toRefs, computed } from 'vue';
+
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
       pokemons: [],
-      urlIdLookuup: {},
+      urlIdLookup: {},
       text: '',
       filteredPokemon: computed(() => updatePokemon())
     });
@@ -45,7 +48,7 @@ export default {
       .then((data) => {
         console.log(data);
         state.pokemons = data.results;
-        (state.urlIdLookuup = data.results.reduce(
+        (state.urlIdLookup = data.results.reduce(
           (acc, cur, idx) => (acc = { ...acc, [cur.name]: idx + 1 })
         )),
           {};
